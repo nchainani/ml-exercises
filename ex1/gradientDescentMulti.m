@@ -8,7 +8,6 @@ m = length(y); % number of training examples
 J_history = zeros(num_iters, 1);
 
 for iter = 1:num_iters
-    fprintf('tttttttttt');
     % ====================== YOUR CODE HERE ======================
     % Instructions: Perform a single gradient step on the parameter vector
     %               theta. 
@@ -25,16 +24,12 @@ for iter = 1:num_iters
         temp = temp - (alpha / m) * sum((X * theta - y).*X(:,ele))
         new_theta(ele, 1) = temp
     end
+    theta = new_theta;
 
     % ============================================================
 
     % Save the cost J in every iteration    
-    cost = computeCostMulti(X, y, theta);
-    fprintf('$$$$$$$$$is this going down: ');
-    fprintf('%f\n', cost);
-
-    J_history(iter) = cost
-    theta = new_theta
+    J_history(iter) = computeCostMulti(X, y, theta);
 end
 
 end
