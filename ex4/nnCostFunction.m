@@ -91,6 +91,45 @@ J = total + reg
 %         Hint: We recommend implementing backpropagation using a for-loop
 %               over the training examples if you are implementing it for the 
 %               first time.
+
+delta2 = 0
+delta1 = 0
+
+for i = 1:m
+  a1 = transpose(X(i,:))
+  %a1 = [1 a1]
+  z2 = Theta1 * a1
+  a2 = (1 ./ (1 + (e .** -z2)))
+  a2 = [1;a2]
+  z3 = Theta2 * a2;1
+  a3 = (1 ./ (1 + (e .** -z3)));1
+
+  yy = zeros([num_labels;1]);1
+  index2 = y(i,1)
+  yy(index2,1) = 1;1
+
+  sdelta3 = a3 - yy
+  sdelta2 = (transpose(Theta2) * sdelta3)(2:end) .* sigmoidGradient(z2)
+
+  delta2 = delta2 + (sdelta3 * transpose(a2))
+  delta1 = delta1 + (sdelta2 * transpose(a1))
+end
+
+
+ltheta1 = Theta1
+ltheta1(:,1) = 0
+
+ltheta2 = Theta2
+ltheta2(:,1) = 0
+reg1 = ltheta1 .* (lambda / m)
+reg2 = ltheta2 .* (lambda / m)
+
+Theta1_grad
+reg1
+
+Theta1_grad = 1/m * delta1 + reg1
+Theta2_grad = 1/m * delta2 + reg2
+
 %
 % Part 3: Implement regularization with the cost function and gradients.
 %
