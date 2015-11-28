@@ -22,12 +22,16 @@ grad = zeros(size(theta));
 
 
 
+n_size = size(theta)(1,1)
 
+ltheta = [0;theta(2:n_size)]
+regularized = ((lambda / (2 * m)) * sum(ltheta .** 2))
+J = (1/(2*m) * sum((X * theta - y).**2)) + regularized
 
-
-
-
-
+% regularized_grad = (lambda / m) * ltheta
+% cost = (sigmoid(X * theta))
+% difference = (cost - y)
+% grad = (1/m * (transpose(X) * difference)) + regularized_grad
 
 
 % =========================================================================
